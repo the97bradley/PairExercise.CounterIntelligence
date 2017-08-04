@@ -81,7 +81,9 @@ function problemC () {
   /* * * * * * * * * * * * * * * * * * * * * * * * * * * *
    *
    * C. read & log poem one stanza two and *then* read & log stanza three
-   *    log 'done' when both are done
+   *    log 'done' when both are done. Note that the specs are opinionated
+   *    and expect the exact word 'done' (all lowercase) to be logged in
+   *    order to pass.
    *    (ignore errors)
    *
    */
