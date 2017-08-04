@@ -153,7 +153,7 @@ function problemF () {
    *
    * F. read & log poem one stanza three and *then* read & log stanza four
    *    or log an error if it occurs for either file read
-   *    always log 'done' when everything is done
+   *    always log 'done' (all lowercase) when everything is done
    *
    */
 
