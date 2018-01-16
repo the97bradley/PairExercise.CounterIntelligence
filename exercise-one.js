@@ -25,6 +25,22 @@ async function theMarks() {
   log(await read('/dossier/B'))
 }
 
+async function theInfiltrators() {
+  // 1. `read` the identities of double agents A, B, and C from
+  //    /spy/A
+  //    /spy/B  and
+  //    /spy/C
+  //
+  // 2. you MUST issue reads for A, B, and C CONCURRENTLY
+  //    if you do not, all reads will fail
+  const A = read('/spy/A')
+      , B = read('/spy/B')
+      , C = read('/spy/C')
+  log(await A)
+  log(await B)
+  log(await C)
+}
+
 
 if (module === require.main) {
   (async () => {
@@ -32,6 +48,8 @@ if (module === require.main) {
     await theMessage()
     log('--- 2. the marks ---')
     await theMarks()
+    log('--- 3. the infiltrators ---')
+    await theInfiltrators()
   })()
 }
 
