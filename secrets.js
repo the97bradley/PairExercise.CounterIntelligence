@@ -7,7 +7,11 @@ const fs = {
   README: ml `I STOLE THESE FROM THE FBI WHO STOLE THEM FROM`
              `"DANGEROUS" PEOPLE`
              ``
-             `DON'T HAVE TIME TO DECRYPT NOW. PLEASE HELP.` .end
+             `DON'T HAVE TIME TO DECRYPT NOW. PLEASE HELP.` .end,
+  dossier: {
+    A: `Look up COINTELPRO on Malcom X`,
+    B: `Look up COINTELPRO on MLK`,
+  },          
 }
 
 String.prototype [readAsync] = async function() { return this.toString() }

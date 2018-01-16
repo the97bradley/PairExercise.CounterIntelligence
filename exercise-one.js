@@ -15,9 +15,23 @@ async function theMessage() {
   log(await read('README'))
 }
 
+async function theMarks() {
+  // 1. `read` bios of resistance members A and B from
+  //    /dossier/A
+  //      and
+  //    /dossier/B
+  // 2. `log` them in any order
+  log(await read('/dossier/A'))
+  log(await read('/dossier/B'))
+}
+
+
 if (module === require.main) {
   (async () => {
-    theMessage()
+    log('--- 1. the message ---')
+    await theMessage()
+    log('--- 2. the marks ---')
+    await theMarks()
   })()
 }
 
