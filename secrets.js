@@ -24,15 +24,12 @@ function concurrentReadGroup(files) {
     , readers = {}
     , names = Object.keys(files)
 
-  return names
-    .map(key => ({
-      key, value: reader(key, files[key])
+  return Object.assign(
+    ...names.map(key => ({
+      [key]: reader(key, files[key])
     }))
-    .reduce((obj, {key, value}) => {
-      obj[key] = value
-      return obj
-    }, {})
-    
+  )
+
   function reader(key, content) {
     return {
       [readAsync]() {
