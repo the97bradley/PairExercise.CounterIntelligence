@@ -1,0 +1,41 @@
+# pt1
+
+1. Read something
+2. Read a couple of things (any order)
+3. Read a couple of things (in a specific order)
+4. Read three things---one will fail, print the error?
+5. Read a key, write the key, then read the file unlocked the key
+  
+  await write('/dev/padlock', await read('/home/mlk/speech.key))
+  read('/home/mlk/speech)
+
+# pt2
+
+1. Start reading many files simultaneously
+     - print them in order
+     - ignore errors
+
+2. Start reading many files simultaneously
+     - print them in order
+     - retry errors
+     - write them somewhere when done.
+
+3. Follow a linked list of files
+     - each file tells you where the next one is
+     - errors will also tell you where to look
+     - write the whole list somewhere when done
+
+4. The OTP to read $file is in $keydir. Only one will work, find it.
+   We know that the file starts with "...."
+   Write the decrypted file to somewhere
+
+   read file
+   for each key in keydir
+     if key decrypts file, stop.
+
+5. Read a list of files
+   Access each file in the list
+   Some of them will throw an ENCRYPTED_FILE error
+   The keys are in /keys. For each failing file, try to
+     decrypt it by writing each key to $file.key
+   Write the concatenated list of all decrypted files somewhere.
