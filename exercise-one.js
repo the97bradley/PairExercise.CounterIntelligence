@@ -1,6 +1,6 @@
 'use strict'
 
-const {read} = require('./secrets')
+const {read, write} = require('./secrets')
 const {log} = console
 
 /**
@@ -41,6 +41,53 @@ async function theInfiltrators() {
   log(await C)
 }
 
+async function theReport() {
+  // A report is located in /report. It has come through in separate lines.
+  // These lines are /report/0, /report/1, /report/2, etc.
+  //
+  // 1. `read` /report/length to find out how many lines there are.
+  const length = await read('/report/length')  
+  const report = (await Promise.all(
+    new Array(length)
+      .fill('[REDACTED]')
+      .map((_, i) => read(`/report/${i}`).catch(() => _))
+  )).join('\n')
+  return report
+
+  // 2. `read` each line.
+  //    SOME LINES ARE REDACTED, AND READING THEM WILL FAIL
+  //    There's nothing you can do about this. Replace them with "[REDACTED]"
+  //    in the finished report.
+  // 3. Concatenate the pieces together in the correct order and return
+  //    the report.
+  // 4. (You may also print it to sate your own curiosity.)
+}
+
+async function openTheChannel() {
+  // You need to open a channel to us, so you can tell us
+  // what you know.
+  //
+  // 1. To open the channel, `write` this string:
+  //
+  //   HELLO FROM THE FUTURE
+  //
+  // To this path:
+  //
+  //   /dev/past
+  //
+  // Make sure you wait for the write to complete before returning.
+  await write('/dev/past', 'HELLO FROM THE FUTURE')  
+}
+
+async function makeTheDrop() {
+  // Send us the report.
+  // Take the report from above, and `write` it to:
+  //  
+  //    /dev/cointelpro
+  //  
+  write('/dev/cointelpro', await theReport())
+}
+
 
 if (module === require.main) {
   (async () => {
@@ -49,131 +96,12 @@ if (module === require.main) {
     log('--- 2. the marks ---')
     await theMarks()
     log('--- 3. the infiltrators ---')
-    await theInfiltrators()
-  })()
+    await theInfiltrators()        
+    log('--- 4. the report ---')
+    await theReport()
+    log('--- 5. open the channel ---')
+    await openTheChannel()
+    log('--- 6. make the drop ---')
+    await makeTheDrop()
+  })().catch(console.error)
 }
-
-// function problemB () {
-//   /* * * * * * * * * * * * * * * * * * * * * * * * * * * *
-//    *
-//    * B. log poem one stanza two and three, in any order
-//    *    (ignore errors)
-//    *
-//    */
-
-//   // callback version
-//   readFile('poem-one/stanza-02.txt', function (err, stanza2) {
-//     console.log('-- B. callback version (stanza two) --');
-//     blue(stanza2);
-//   });
-//   readFile('poem-one/stanza-03.txt', function (err, stanza3) {
-//     console.log('-- B. callback version (stanza three) --');
-//     blue(stanza3);
-//   });
-
-//   // promise version
-//   // ???
-
-// }
-
-// function problemC () {
-//   /* * * * * * * * * * * * * * * * * * * * * * * * * * * *
-//    *
-//    * C. read & log poem one stanza two and *then* read & log stanza three
-//    *    log 'done' when both are done. Note that the specs are opinionated
-//    *    and expect the exact word 'done' (all lowercase) to be logged in
-//    *    order to pass.
-//    *    (ignore errors)
-//    *
-//    */
-
-//   // callback version
-//   readFile('poem-one/stanza-02.txt', function (err, stanza2) {
-//     console.log('-- C. callback version (stanza two) --');
-//     blue(stanza2);
-//     readFile('poem-one/stanza-03.txt', function (err, stanza3) {
-//       console.log('-- C. callback version (stanza three) --');
-//       blue(stanza3);
-//       console.log('-- C. callback version done --');
-//     });
-//   });
-
-//   // promise version (hint: don't need to nest `then` calls)
-//   // ???
-
-// }
-
-// function problemD () {
-//   /* * * * * * * * * * * * * * * * * * * * * * * * * * * *
-//    *
-//    * D. log poem one stanza four or an error if it occurs
-//    *
-//    */
-
-//   // callback version
-//   readFile('poem-one/wrong-file-name.txt', function (err, stanza4) {
-//     console.log('-- D. callback version (stanza four) --');
-//     if (err) magenta(err);
-//     else blue(stanza4);
-//   });
-
-//   // promise version
-//   // ???
-
-// }
-
-// function problemE () {
-//   /* * * * * * * * * * * * * * * * * * * * * * * * * * * *
-//    *
-//    * E. read & log poem one stanza three and *then* read & log stanza four
-//    *    or log an error if it occurs for either file read
-//    *
-//    */
-
-//   // callback version
-//   readFile('poem-one/stanza-03.txt', function (err, stanza3) {
-//     console.log('-- E. callback version (stanza three) --');
-//     if (err) return magenta(err);
-//     blue(stanza3);
-//     readFile('poem-one/wrong-file-name.txt', function (err2, stanza4) {
-//       console.log('-- E. callback version (stanza four) --');
-//       if (err2) return magenta(err2);
-//       blue(stanza4);
-//     });
-//   });
-
-//   // promise version
-//   // ???
-
-// }
-
-// function problemF () {
-//   /* * * * * * * * * * * * * * * * * * * * * * * * * * * *
-//    *
-//    * F. read & log poem one stanza three and *then* read & log stanza four
-//    *    or log an error if it occurs for either file read
-//    *    always log 'done' (all lowercase) when everything is done
-//    *
-//    */
-
-//   // callback version
-//   readFile('poem-one/stanza-03.txt', function (err, stanza3) {
-//     console.log('-- F. callback version (stanza three) --');
-//     if (err) {
-//       magenta(err);
-//       console.log('-- F. callback version done --');
-//       return;
-//     }
-//     blue(stanza3);
-//     readFile('poem-one/wrong-file-name.txt', function (err2, stanza4) {
-//       console.log('-- F. callback version (stanza four) --');
-//       if (err2) magenta(err2);
-//       else blue(stanza4);
-//       console.log('-- F. callback version done --');
-//     });
-//   });
-
-//   // promise version
-//   // ???
-
-// }
