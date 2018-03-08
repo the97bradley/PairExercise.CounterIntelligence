@@ -4,21 +4,11 @@ const readAsync = Symbol('readAsync')
 
 module.exports = {read, write}
 
-const past = {
-  isOpen: false,      
-  async [writeAsync](path, data) {
-    if (data !== 'HELLO FROM THE FUTURE')
-      throw new ChannelOpenError(path)
-    return sleep(150).then(() => past.isOpen = true)
-  }
-}
-
 const {log} = console
 
 const cointelpro = {
   async [writeAsync](path, data) {
-    if (!past.isOpen) throw new ChannelOpenError(path)
-    if (data !== REPORT.map(_ => _ === isRedacted ? '[REDACTED]' : _).join('\n'))
+    if (data.trim() !== REPORT.map(_ => _ === isRedacted ? '[REDACTED]' : _).join('\n'))
       throw new Error('⚠️ Report looks incorrect')
     log(ml `⭐️⭐️⭐️⭐️⭐️⭐️ REPORT RECEIVED ⭐️⭐️⭐️⭐️⭐️⭐️`
            `Thank you for your service. `
@@ -85,7 +75,7 @@ const fs = {
     B: `Spy B`,
     C: `Spy C`
   }),
-  dev: {past, cointelpro},
+  dev: {cointelpro},
   report: jitter(...REPORT),
 }
 
@@ -100,12 +90,6 @@ class ConcurrentReadError extends Error {
 class RedactedError extends Error {
   constructor(path) {
     super(`⚠️ read ${path}: ██████████████████ has been redacted under the Charter §7.2`)
-  }
-}
-
-class ChannelOpenError extends Error {
-  constructor(path) {
-    super(`⚠️ write ${path}: Channel must be opened with a HELLO`)
   }
 }
 
