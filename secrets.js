@@ -6,18 +6,39 @@ module.exports = {read, write}
 
 const {log} = console
 
-const cointelpro = {
-  async [writeAsync](path, data) {
-    if (data.trim() !== REPORT.map(_ => _ === isRedacted ? '[REDACTED]' : _).join('\n'))
+const keys = {
+  '5hanover': 'leaked',
+  'AlwaysBeCoding': 'safe'
+}
+
+const validateReport = (data) => {
+  if (data.trim() !== REPORT.map(_ => _ === isRedacted ? '[REDACTED]' : _).join('\n'))
       throw new Error('⚠️ Report looks incorrect')
-    log(ml `⭐️⭐️⭐️⭐️⭐️⭐️ REPORT RECEIVED ⭐️⭐️⭐️⭐️⭐️⭐️`
-           `Thank you for your service. `
-           `You can't stop what they have have already done`
-           `to your world. But perhaps we can stop what they are going`
-           `to do to ours.`
-           `⭐️⭐️⭐️⭐️⭐️⭐️` .end)
+}
+
+const cointel = {
+  async [writeAsync](path, key, data) {
+    validateReport(data)
+    if(keys[key] && keys[key] === "leaked")
+      log(ml `⭐️⭐️⭐️⭐️⭐️⭐️ REPORT RECEIVED ⭐️⭐️⭐️⭐️⭐️⭐️`
+            `Thank you for your service.`
+            `-------------------------------------------`
+            `              ⚠️  ATTENTION ⚠️`
+            `The key you used was too old and reportedly`
+            `leaked - You might have been exposed.`
+            `Extra-Credit assignment: Make sure your code`
+            `keeps retrying to read "/key" until it gets`
+            `a valid response.`
+            `⭐️⭐️⭐️⭐️⭐️⭐️` .end)
+    else if(keys[key] && keys[key] === "safe")
+      log(ml `⭐️⭐️⭐️ REPORT SAFELY RECEIVED ⭐️⭐️⭐️`
+            `Thank you for your service.`
+            `⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐` .end)
+    else
+      throw new Error('⚠️ Incorrect Key')
   }    
 }
+
 
 const isRedacted = {
   [readAsync](path) {
@@ -28,54 +49,54 @@ const isRedacted = {
 const REPORT = [
   ...ml
   `COUNTERINTELLIGENCE PROGRAM`
-  `BLACK NATIONALIST - HATE GROUPS`
-  `RACIAL INTELLIGENCE`
+  `STOP PROMISES`
+  `INSTRUCTIONAL INTELLIGENCE`
   `--------------------`
-  `ReBureauairtel to Albany, 3/4/68`
+  `Re: Bureau to NY, 3/4/07`
   `1.`
   .lines,
   isRedacted,
   ...ml
-  `has been assigned to coordinate captioned program for the Richmond Division`
+  `has been assigned to coordinate captioned program for the JS Division`
   `2.`
-  `The only Black Nationalist Movement known to exist in the`    
-  `Richmond territory is the Nation of Islam (NOI). This organization`
-  `consists of one Mosque (Muhammad Mosque #24) in the City of Richmond,`
-  `with about 35 hard-core members, 8 of whom are`
-  `officers. This Mosque holds regular weekly meetings.`
+  `We've detected an user movement in the "FullStack Academy of Code"` 
+  `using promises in JavaScript. This organization consists of team of`
+  `FullStack instructors, with about 12 hard-core members, 2 of whom are`
+  `are officers. This organization holds regular weekly meetings.`
   ``.lines,
   isRedacted,
   isRedacted,
   ...ml
   `4.`
-  `Richmond believes that one of the best ways to thwart`
-  `the efforts of militant black nationalist groups and individuals`
-  `is to discredit them. In this regard it is felt that the`
-  `offices of origin on said groups and individuals should fully`
-  `develop and furnish to interested offices any derogatory information`
-  `developed so that this information can be "released" to`
-  `appropriate news media, informants, and sources. By "releasing"`
-  `derogatory data prior to a speech or appearance of a militant`
-  `would assist in planting the seed of distrust and thereby diminish the`
-  `militants' effect.`
+  `The JavaScript Division believes that one of the best ways to thwart`
+  `the efforts of user groups and individuals using promises in JS is to`
+  `discredit them. In this regard it is felt that the offices of origin`
+  `on said individuals should fully develop and furnish to interested`
+  `offices any derogatory information developed so that this information`
+  `can be posted online using callbacks.`
   .lines
 ]
-
 const fs = {
-  README: ml `I STOLE THESE FROM THE FBI WHO STOLE THEM FROM`
-             `"DANGEROUS" PEOPLE`
+  README: ml `I STOLE THESE FROM "DANGEROUS" PEOPLE`
              ``
-             `DON'T HAVE TIME TO DECRYPT NOW. PLEASE HELP.` .end,
+             `DON'T HAVE TIME TO CONTINUE NOW. PLEASE HELP.`
+             ``
+             `YOU NEED TO FIND WHO THEY ARE TARGETING (THE MARKS)`
+             `WHO ARE THE SPIES AND THE REPORT.`
+             `FINALLY, SEND THE REPORT SAFELLY TO THE HEADQURTERS`
+            .end,
   dossier: {
-    A: `Look up COINTELPRO on Malcom X`,
-    B: `Look up COINTELPRO on MLK`,
+    A: `Look up COINTEL on Cassiozen`,
+    B: `Look up COINTEL on TmKelly`,
+    C: `Look up COINTEL on Ashi`,
   },
   spy: concurrentReadGroup({
     A: `Spy A`,
     B: `Spy B`,
     C: `Spy C`
   }),
-  dev: {cointelpro},
+  cointel,
+  key: failingResponse(`AlwaysBeCoding`),
   report: jitter(...REPORT),
 }
 
@@ -152,6 +173,37 @@ function concurrentReadGroup(files) {
   }
 }
 
+function failingResponse(data) {
+  let timer = null
+    , failing = true
+
+  function startTimer() {
+    if (timer) return
+    failing = false;
+    timer = setTimeout(() => {
+      failing = true;
+      timer = null;
+    }, 10)
+  }
+  
+  return {
+    [readAsync]() { 
+      if(failing) {
+        return new Promise((resolve, reject) => {
+          startTimer();
+          reject(new Error("Key server is down"))
+        })
+      }
+      else {
+        return Promise.resolve(data)
+      }
+        
+    }
+  }
+  
+}
+
+
 function all(ary) {
   let i = ary.length; while (--i >= 0) {
     if (!ary[i]) return ary[i]
@@ -166,8 +218,8 @@ function read(path) {
   return parts(path).reduce((fs, part) => fs[part], fs) [readAsync] (path)
 }
 
-function write(path, data) {
-  return parts(path).reduce((fs, part) => fs[part], fs) [writeAsync] (path, data)
+function write(path, key, data) {
+  return parts(path).reduce((fs, part) => fs[part], fs) [writeAsync] (path, key, data)
 }
 
 const parts = path => path.split('/').filter(x => x)
