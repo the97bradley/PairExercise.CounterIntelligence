@@ -96,6 +96,28 @@ const fs = {
     C: `Spy C - Codename Ribs`
   }),
   cointel,
+  schedule: {
+    'TmV4dCB': `{
+      "data": "TmV4dCBNZWV0aW5nczoNCj09PT09PT09PT09PT09DQoNCjAyLzI3Oi",
+      "next": "BOWSBCd"
+    }`,
+    'BOWSBCd': `{
+      "data": "BOWSBCdXJlYXUgT2ZmaWNlDQowNC8xMDogVGh1bmRlcidzIGhpZGVv",
+      "next": "dXQNCjA"
+    }`,
+    'dXQNCjA': failingResponse(`{
+      "data": "dXQNCjA3LzIxOiBSb3NlbGFuZCBzYWZlIGhvdXNlDQoNClNlY3JldC",
+      "next": "BLbm9ja"
+    }`),
+    'BLbm9ja': `{
+      "data": "BLbm9jayBDb2RlOg0KPT09PT09PT09PT09PT09PT09DQoNCmtub2N",
+      "next": "rIHwgcG"
+    }`,
+    'rIHwgcG': failingResponse(`{
+      "data": "rIHwgcGF1c2UgfCBrbm9jayBrbm9jayB8IHBhdXNlIHwga25vY2sg",
+      "next": null
+    }`)
+  },
   key: failingResponse(`AlwaysBeCoding`),
   report: jitter(...REPORT),
 }
@@ -111,6 +133,13 @@ class ConcurrentReadError extends Error {
 class RedactedError extends Error {
   constructor(path) {
     super(`⚠️ read ${path}: ██████████████████ has been redacted under the Charter §7.2`)
+  }
+}
+
+class Server503Error extends Error {
+  constructor() {
+    super(`⚠️ 503 - Server was Unavailable. Please try again.`)
+    this.status = 503
   }
 }
 
@@ -191,7 +220,7 @@ function failingResponse(data) {
       if(failing) {
         return new Promise((resolve, reject) => {
           startTimer();
-          reject(new Error("Key server is down"))
+          reject(new Server503Error())
         })
       }
       else {
