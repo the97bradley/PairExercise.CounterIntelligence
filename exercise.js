@@ -1,19 +1,6 @@
 'use strict'
 
-/**
- * Throughout this file, you will use these
- * async methods to communicate safely with
- * the revolutionary headquarters systems.
- * 
- * @example
- * // Reads files from informant server.
- * read(path); // Returns promise
- * @example
- * // Writes file to informant server.
- * write(path, key, data) // Returns promise
- */
 const {read, write} = require('./secrets')
-
 
 /**
  * i've left instructions for you in 'README'
