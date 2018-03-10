@@ -1,17 +1,14 @@
 {
-  "name": "practical-promises",
-  "version": "1.0.0",
+  "name": "promises-cointel",
+  "version": "0.1.0",
   "description": "",
-  "main": "index.js",
+  "main": "exercise.js",
   "scripts": {
-    "test": "mocha **/*.spec.js"
+    "start": "nodemon exercise.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "chai": "^3.3.0",
-    "chai-spies": "^0.7.1",
-    "manyline": "0.0.1",
-    "mocha": "^2.3.3"
+    "manyline": "0.0.1"
   }
 }
