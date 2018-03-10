@@ -91,9 +91,9 @@ const fs = {
     C: `Look up COINTEL on Ashi`,
   },
   spy: concurrentReadGroup({
-    A: `Spy A`,
-    B: `Spy B`,
-    C: `Spy C`
+    A: `Spy A - Codename Oddie`,
+    B: `Spy B - Codename Cody`,
+    C: `Spy C - Codename Ribs`
   }),
   cointel,
   key: failingResponse(`AlwaysBeCoding`),
