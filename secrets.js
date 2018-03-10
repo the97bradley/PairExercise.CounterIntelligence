@@ -32,7 +32,11 @@ const cointel = {
             `⭐️⭐️⭐️⭐️⭐️⭐️` .end)
     else if(keys[key] && keys[key] === "safe")
       log(ml `⭐️⭐️⭐️ REPORT SAFELY RECEIVED ⭐️⭐️⭐️`
-            `Thank you for your service.`
+            `Thank you for your service, great job!`
+            `----------------------------------------`
+            `You have proved yourself worthy and were`
+            `assigned a new challenge: Open 'bonus-`
+            `exercise.js'`
             `⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐` .end)
     else
       throw new Error('⚠️ Incorrect Key')
