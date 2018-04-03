@@ -122,6 +122,17 @@ const fs = {
       "next": null
     }`)
   },
+  agent: {
+    '0': `Agent C.Angultz`,
+    '1': failingResponse(`Agent Martins`),
+    '2': notFound(),
+    '3': `Agent P.Lim`,
+    '5': failingResponse(`Agent Fox`),
+    '6': notFound(),
+    '7': `Agent Bear`,
+    '8': notFound(),
+    '9': failingResponse(`Agent N.Hama`),
+  },
   key: failingResponse(`AlwaysBeCoding`),
   report: jitter(...REPORT),
 }
@@ -144,6 +155,13 @@ class Server503Error extends Error {
   constructor() {
     super(`⚠️ 503 - Server was Unavailable. Please try again.`)
     this.status = 503
+  }
+}
+
+class Server404Error extends Error {
+  constructor() {
+    super(`⚠️ 404 - Not Found.`)
+    this.status = 404
   }
 }
 
@@ -236,6 +254,13 @@ function failingResponse(data) {
   
 }
 
+function notFound() {
+  return {
+    [readAsync]() { 
+      return Promise.reject(new Server404Error())
+    }
+  }
+}
 
 function all(ary) {
   let i = ary.length; while (--i >= 0) {
