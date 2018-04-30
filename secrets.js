@@ -20,24 +20,25 @@ const cointel = {
   async [writeAsync](path, key, data) {
     validateReport(data)
     if(keys[key] && keys[key] === "leaked")
-      log(ml `⭐️⭐️⭐️⭐️⭐️⭐️ REPORT RECEIVED ⭐️⭐️⭐️⭐️⭐️⭐️`
-            `Thank you for your service.`
-            `-------------------------------------------`
-            `              ⚠️  ATTENTION ⚠️`
-            `The key you used was too old and reportedly`
-            `leaked - You might have been exposed.`
-            `Extra-Credit assignment: Make sure your code`
-            `keeps retrying to read "/key" until it gets`
-            `a valid response.`
-            `⭐️⭐️⭐️⭐️⭐️⭐️` .end)
+      log(ml `⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️ REPORT RECEIVED ⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️`
+             `Thank you for your service.`
+             `-------------------------------------------`
+             `              ⚠️  ATTENTION ⚠️`
+             `The key you used was too old and reportedly`
+             `leaked - You might have been exposed.`
+             `-------------------------------------------`
+             `Extra credit assignment: ensure your code`
+             `keeps retrying to read "/key" until it gets`
+             `a valid response.`
+             `⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️` .end)
     else if(keys[key] && keys[key] === "safe")
-      log(ml `⭐️⭐️⭐️ REPORT SAFELY RECEIVED ⭐️⭐️⭐️`
-            `Thank you for your service, great job!`
-            `----------------------------------------`
-            `You have proved yourself worthy and were`
-            `assigned a new challenge: Open 'bonus-`
-            `exercise.js'`
-            `⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐` .end)
+      log(ml `⭐️⭐️⭐️⭐️⭐️ REPORT SAFELY RECEIVED ⭐️⭐️⭐️⭐️⭐️⭐️`
+             `Thank you for your service, great job!`
+             `-------------------------------------------`
+             `You have proved yourself worthy and have`
+             `been assigned a TOP SECRET challenge. Open`
+             `'bonus-exercise.js' for your next mission.`
+             `⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐⭐️⭐️⭐️⭐️⭐️⭐️⭐️` .end)
     else
       throw new Error('⚠️ Incorrect Key')
   }
@@ -52,42 +53,41 @@ const isRedacted = {
 
 const REPORT = [
   ...ml
-  `COUNTERINTELLIGENCE PROGRAM`
-  `STOP PROMISES`
-  `INSTRUCTIONAL INTELLIGENCE`
+  `COUNTERINTELLIGENCE PROGRAM:`
+  `STOP PROMISES INSTRUCTION`
   `--------------------`
-  `Re: Bureau to NY, 3/4/07`
+  `Re: Bureau to NY, 2018-04-30`
   `1.`
   .lines,
   isRedacted,
   ...ml
-  `has been assigned to coordinate captioned program for the JS Division`
+  `has been assigned to coordinate this program for the JS Division.`
   `2.`
-  `We've detected an user movement in the "FullStack Academy of Code"`
-  `using promises in JavaScript. This organization consists of team of`
-  `FullStack instructors, with about 12 hard-core members, 2 of whom are`
-  `are officers. This organization holds regular weekly meetings.`
-  ``.lines,
+  `We've detected JavaScript Promise usage emanating from the`
+  `"FullStack Academy of Code". This organization comprises a team of`
+  `instructors, agents, and trainees, holding regular weekly meetings.`
+  .lines,
   isRedacted,
   isRedacted,
   ...ml
   `4.`
   `The JavaScript Division believes that one of the best ways to thwart`
   `the efforts of user groups and individuals using promises in JS is to`
-  `discredit them. In this regard it is felt that the offices of origin`
-  `on said individuals should fully develop and furnish to interested`
-  `offices any derogatory information developed so that this information`
-  `can be posted online using callbacks.`
+  `discredit them. To that end, we will be ramping up our use of propaganda`
+  `in favor of callbacks, as well as deriding any mention of async/await`
+  `or functional promise usage.`
   .lines
 ]
 const fs = {
-  README: ml `I STOLE THESE FROM "DANGEROUS" PEOPLE`
+  README: ml `I STOLE THESE MATERIALS FROM A SECRET ANTI-JS GROUP.`
              ``
-             `DON'T HAVE TIME TO CONTINUE NOW. PLEASE HELP.`
+             `TIME IS SHORT, PLEASE RETRIEVE THESE DOCUMENTS ASAP.`
              ``
-             `YOU NEED TO FIND WHO THEY ARE TARGETING (THE MARKS)`
-             `WHO ARE THE SPIES AND THE REPORT.`
-             `FINALLY, SEND THE REPORT SAFELLY TO THE HEADQURTERS`
+             `THEY INCLUDE WHOM THE GROUP IS TARGETING (THE MARKS),`
+             `THE IDENTITIES OF CERTAIN SPIES,`
+             `AND THE TEXT OF AN INTERNAL REPORT.`
+             ``
+             `ONCE RETRIEVED, FORWARD THE REPORT TO HEADQUARTERS.`
             .end,
   dossier: {
     A: `Look up COINTEL on Cassiozen`,
