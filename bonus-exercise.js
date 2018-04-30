@@ -21,7 +21,7 @@ async function theDoubleAgents() {
 async function theSchedule() {
   // We need to find and infiltrate their upcoming meetings
   // Their schedule data is encoded in Base64 and splited
-  // into multiple json Files. 
+  // into multiple json Files.
   // Each file contains part of the information and a reference
   // to the next file.
   //

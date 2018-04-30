@@ -1,16 +1,16 @@
 'use strict'
 
-/**	
- * Throughout this file, you will use these	
- * async methods to communicate safely with	
- * the revolutionary headquarters systems.	
- * 	
- * @example	
- * // Reads files from informant server.	
- * read(path); // Returns promise	
- * @example	
- * // Writes file to informant server.	
- * write(path, key, data) // Returns promise	
+/**
+ * Throughout this file, you will use these
+ * async methods to communicate safely with
+ * the revolutionary headquarters systems.
+ *
+ * @example
+ * // Reads files from informant server.
+ * read(path); // Returns promise
+ * @example
+ * // Writes file to informant server.
+ * write(path, key, data) // Returns promise
  */
 const {read, write} = require('./secrets')
 
@@ -20,7 +20,7 @@ const {read, write} = require('./secrets')
  * then log it - no time to explain
  **/
 async function theMessage() {
-  // 1. call `read('/README')` 
+  // 1. call `read('/README')`
   // 2. `console.log` it to the screen
   // (Don't forget to await)
 }
@@ -49,13 +49,13 @@ async function theInfiltrators() {
 
 async function theKey() {
   // You will need a secret key to send the report later.
-  // Try to `read` /key 
+  // Try to `read` /key
   // We're having trouble keeping this service up - it may fail
   // I got an old key: "5hanover" - that should work
   //
   // 1. `read` the secret key from /key and return it
   // 2. In case it fails, return the old "5hanover" key.
-  
+
 }
 
 async function theReport() {
@@ -76,7 +76,7 @@ async function theReport() {
 
 async function makeTheDrop() {
   // Send us the report.
-  // Take the key and the report from above, 
+  // Take the key and the report from above,
   // and `write` it to /cointel
   //
 }

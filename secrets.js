@@ -40,7 +40,7 @@ const cointel = {
             `⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐` .end)
     else
       throw new Error('⚠️ Incorrect Key')
-  }    
+  }
 }
 
 
@@ -63,7 +63,7 @@ const REPORT = [
   ...ml
   `has been assigned to coordinate captioned program for the JS Division`
   `2.`
-  `We've detected an user movement in the "FullStack Academy of Code"` 
+  `We've detected an user movement in the "FullStack Academy of Code"`
   `using promises in JavaScript. This organization consists of team of`
   `FullStack instructors, with about 12 hard-core members, 2 of whom are`
   `are officers. This organization holds regular weekly meetings.`
@@ -219,7 +219,7 @@ function concurrentReadGroup(files) {
         }
       } finally {
         readers = {}
-      }      
+      }
     }, 13)
   }
 }
@@ -236,9 +236,9 @@ function failingResponse(data) {
       timer = null;
     }, 10)
   }
-  
+
   return {
-    [readAsync]() { 
+    [readAsync]() {
       if(failing) {
         return new Promise((resolve, reject) => {
           startTimer();
@@ -248,15 +248,15 @@ function failingResponse(data) {
       else {
         return Promise.resolve(data)
       }
-        
+
     }
   }
-  
+
 }
 
 function notFound() {
   return {
-    [readAsync]() { 
+    [readAsync]() {
       return Promise.reject(new Server404Error())
     }
   }
