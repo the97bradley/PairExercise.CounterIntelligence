@@ -23,6 +23,7 @@ async function theMessage() {
   // 1. call `read('/README')`
   // 2. `console.log` it to the screen
   // (Don't forget to await)
+    console.log(await read('/README'))
 }
 
 async function theMarks() {
